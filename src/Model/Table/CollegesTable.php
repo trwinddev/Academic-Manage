@@ -9,5 +9,6 @@ class CollegesTable extends Table
   public function initialize(array $config): void
   {
     // tbl_colleges
+    $this->setTable('tbl_colleges');
   }
 }

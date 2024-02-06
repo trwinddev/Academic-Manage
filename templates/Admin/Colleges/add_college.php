@@ -38,7 +38,10 @@ if (!empty($title)) {
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <form id="form-add-college">
+            <?= $this->Form->create($college, [
+                'id' => 'form-add-college',
+                'type' => 'file'
+            ]) ?>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -114,7 +117,7 @@ if (!empty($title)) {
                   </div>
                 </div>
               </div>
-            </form>
+            <?= $this->Form->end() ?>
           </div>
           <!-- /.card-body -->
         </div>
