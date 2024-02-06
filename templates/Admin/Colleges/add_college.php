@@ -56,8 +56,8 @@ if (!empty($title)) {
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="">Desciption</label>
-                    <textarea name="desciption" id="desciption" rows="3" placeholder="Enter description" class="form-control"></textarea>
+                    <label for="">Description</label>
+                    <textarea name="description" id="description" rows="3" placeholder="Enter description" class="form-control"></textarea>
                   </div>
                 </div>
                 <div class="col-sm-6">
