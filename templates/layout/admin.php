@@ -68,6 +68,10 @@
     "/dist/js/demo.js",
     "/dist/js/pages/dashboard.js",
   ]) ?>
+
+  <?= $this->fetch('bottomScriptLinks') ?>
+  <?= $this->fetch('script') ?>
+
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button)
