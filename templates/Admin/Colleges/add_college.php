@@ -71,7 +71,7 @@ if (!empty($title)) {
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">Total faculty<span class="character-required">*</span></label>
-                    <input type="text" required name="total_faculty" id="total_faculty" placeholder="Enter total faculty" class="form-control">
+                    <input type="number" required min="10" name="total_faculty" id="total_faculty" placeholder="Enter total faculty" class="form-control">
                   </div>
                 </div>
                 <div class="col-sm-6">
