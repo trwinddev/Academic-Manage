@@ -54,6 +54,35 @@ return function (RouteBuilder $routes): void {
     // My admin routes
     $routes->prefix('admin', function (RouteBuilder $routes) {
         $routes->connect('/', ['controller' => 'Dashboards', 'action' => 'index']);
+
+        // college routes
+        $routes->connect('/add-college', ['controller' => 'Colleges', 'action' => 'addCollege']);
+        $routes->connect('/list-colleges', ['controller' => 'Colleges', 'action' => 'listCollege']);
+        $routes->connect('/edit-college/:id', ['controller' => 'Colleges', 'action' => 'editCollege'], ['pass' => 'id']);
+        $routes->connect('/delete-college/:id', ['controller' => 'Colleges', 'action' => 'deleteCollege'], ['pass' => 'id']);
+
+        // branch routes
+        $routes->connect('/add-branch', ['controller' => 'Branches', 'action' => 'addBranch']);
+        $routes->connect('/list-branches', ['controller' => 'Branches', 'action' => 'listBranch']);
+        $routes->connect('/edit-branch/:id', ['controller' => 'Branches', 'action' => 'editBranch'], ['pass' => 'id']);
+        $routes->connect('/delete-branch/:id', ['controller' => 'branches', 'action' => 'deleteBranch'], ['pass' => 'id']);
+
+        // student routes
+        $routes->connect('/add-student', ['controller' => 'Students', 'action' => 'addStudent']);
+        $routes->connect('/list-students', ['controller' => 'Students', 'action' => 'listStudent']);
+        $routes->connect('/edit-student/:id', ['controller' => 'Students', 'action' => 'editStudent'], ['pass' => 'id']);
+        $routes->connect('/delete-student/:id', ['controller' => 'Students', 'action' => 'deleteStudent'], ['pass' => 'id']);
+
+        // staff routes
+        $routes->connect('/add-staff', ['controller' => 'Staffs', 'action' => 'addStaff']);
+        $routes->connect('/list-staffs', ['controller' => 'Staffs', 'action' => 'listStaff']);
+        $routes->connect('/edit-staff/:id', ['controller' => 'Staffs', 'action' => 'editStaff'], ['pass' => 'id']);
+        $routes->connect('/delete-staff/:id', ['controller' => 'Staffs', 'action' => 'deleteStaff'], ['pass' => 'id']);
+
+        // report routes
+        $routes->connect('/college-report', ['controller' => 'Reports', 'action' => 'collegesReport']);
+        $routes->connect('/student-report', ['controller' => 'Reports', 'action' => 'studentsReport']);
+        $routes->connect('/staff-report', ['controller' => 'Reports', 'action' => 'staffsReport']);
     });
 
     $routes->scope('/', function (RouteBuilder $builder): void {
