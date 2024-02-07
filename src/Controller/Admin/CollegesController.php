@@ -93,6 +93,14 @@ class CollegesController extends AppController
 
   public function deleteCollege($id = null)
   {
-    $this->set('title', 'Delete College | Academic Management');
+    $this->request->allowMethod(['post', 'delete']);
+    $college = $this->Colleges->get($id);
+
+    if ($this->Colleges->delete($college)) {
+      $this->Flash->success('College has been deleted successfully');
+    } else {
+      $this->Flash->error('Failed to delete college');
+    }
+    return $this->redirect(['action' => 'listCollege']);
   }
 }

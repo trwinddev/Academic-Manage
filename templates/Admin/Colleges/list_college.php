@@ -57,8 +57,12 @@ $this->Html->css([
                       <td><?= $college->short_name ?></td>
                       <td><?= $this->Html->image('/' . $college->cover_image, ['style' => 'width: 70px;height: 70px; object-fit: cover;']) ?></td>
                       <td>
+                        <form id="form-delete-college-<?= $college->id ?>" action="<?= $this->Url->build('/admin/delete-college/' . $college->id) ?>" method="post">
+                          <?= $this->Form->hidden('_csrfToken', ['value' => $this->request->getAttribute('csrfToken')]) ?>
+                          <input type="hidden" value="<?= $college->id ?>" name="id">
+                        </form>
                         <a href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
-                        <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                        <a href="javascript:void(0)" onclick="if(confirm('Are you sure want to delete?')){$('#form-delete-college-<?= $college->id ?>').submit()}" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
                       </td>
                     </tr>
                 <?php
