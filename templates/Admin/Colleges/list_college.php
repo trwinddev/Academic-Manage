@@ -56,13 +56,16 @@ $this->Html->css([
                       <td><?= "<b>Name: </b>" . $college->name . "<br/><b>Email: </b> " . $college->email . "<br/><b>PhoneNo: </b>" . $college->contact_number ?></td>
                       <td><?= $college->short_name ?></td>
                       <td><?= $this->Html->image('/' . $college->cover_image, ['style' => 'width: 70px;height: 70px; object-fit: cover;']) ?></td>
-                      <td>
-                        <form id="form-delete-college-<?= $college->id ?>" action="<?= $this->Url->build('/admin/delete-college/' . $college->id) ?>" method="post">
-                          <?= $this->Form->hidden('_csrfToken', ['value' => $this->request->getAttribute('csrfToken')]) ?>
-                          <input type="hidden" value="<?= $college->id ?>" name="id">
-                        </form>
+                      <td class="d-flex">
                         <a href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
-                        <a href="javascript:void(0)" onclick="if(confirm('Are you sure want to delete?')){$('#form-delete-college-<?= $college->id ?>').submit()}" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                        <div class="ml-2">
+                          <?= $this->Form->create(null, ['url' => ['action' => 'deleteCollege', $college->id], 'id' => 'form-delete-college-' . $college->id]) ?>
+                          <?= $this->Form->hidden('id', ['value' => $college->id]) ?>
+                          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">
+                            <i class="fa fa-trash-alt"></i>
+                          </button>
+                          <?= $this->Form->end() ?>
+                        </div>
                       </td>
                     </tr>
                 <?php
