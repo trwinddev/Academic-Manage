@@ -53,12 +53,12 @@ $this->Html->css([
                 ?>
                     <tr>
                       <td><?= $college->id ?></td>
-                      <td><?= "Name: " . $college->name . "<br/>Email: " . $college->email . "<br/>PhoneNo: " . $college->contact_number ?></td>
+                      <td><?= "<b>Name: </b>" . $college->name . "<br/><b>Email: </b> " . $college->email . "<br/><b>PhoneNo: </b>" . $college->contact_number ?></td>
                       <td><?= $college->short_name ?></td>
                       <td><?= $this->Html->image('/' . $college->cover_image, ['style' => 'width: 70px;height: 70px; object-fit: cover;']) ?></td>
                       <td>
-                        <a href="" class="btn btn-warning">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <a href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                        <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
                       </td>
                     </tr>
                 <?php
@@ -66,15 +66,6 @@ $this->Html->css([
                 }
                 ?>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>College Info</th>
-                  <th>Short Name</th>
-                  <th>Cover Image</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
           <!-- /.card-body -->

@@ -54,6 +54,40 @@ class CollegesController extends AppController
 
   public function editCollege($id = null)
   {
+    $college = $this->Colleges->get($id, [
+      'contain' => []
+    ]);
+
+    if ($this->request->is(['post', 'put', 'patch'])) {
+      $collegeData = $this->request->getData();
+
+      $fileObject = $this->request->getData('cover_image');
+      $filename = $fileObject->getClientFilename();
+      $fileExtension = $fileObject->getClientMediaType();
+
+      if (!empty($filename)) {
+        $valid_extensions = array('image/png', 'image/jpg', 'image/jpeg', 'image/gif');
+        if (in_array($fileExtension, $valid_extensions)) {
+          $destination = WWW_ROOT . 'colleges' . DS . $filename;
+          $fileObject->moveTo($destination);
+          $collegeData = $this->request->getData();
+          $collegeData['cover_image'] = 'colleges' . DS . $filename;
+        } else {
+          $this->Flash->error('Uploaded file is not an image');
+        }
+      } else {
+        $collegeData['cover_image'] = $college->cover_image;
+      }
+      $college = $this->Colleges->patchEntity($college, $collegeData);
+      if ($this->Colleges->save($college)) {
+        $this->Flash->success('College has been edited successfully');
+        return $this->redirect(['action' => 'listCollege']);
+      } else {
+        $this->Flash->error('Failed to edit college');
+      }
+    }
+
+    $this->set(compact('college'));
     $this->set('title', 'Edit College | Academic Management');
   }
 
