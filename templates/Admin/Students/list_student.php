@@ -48,17 +48,6 @@ $this->Html->css([
                   <th>Action</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Student Info</th>
-                  <th>College/Branch</th>
-                  <th>Gender</th>
-                  <th>Profile Image</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
           <!-- /.card-body -->

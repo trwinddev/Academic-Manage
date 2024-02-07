@@ -46,15 +46,30 @@ $this->Html->css([
                   <th>Action</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>College Info</th>
-                  <th>Short Name</th>
-                  <th>Cover Image</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
+              <tbody>
+                <?php
+                if (count($colleges) > 0) {
+                  foreach ($colleges as $index => $college) {
+                ?>
+                    <tr>
+                      <td><?= $college->id ?></td>
+                      <td><?= "<b>Name: </b>" . $college->name . "<br/><b>Email: </b> " . $college->email . "<br/><b>PhoneNo: </b>" . $college->contact_number ?></td>
+                      <td><?= $college->short_name ?></td>
+                      <td><?= $this->Html->image('/' . $college->cover_image, ['style' => 'width: 70px;height: 70px; object-fit: cover;']) ?></td>
+                      <td>
+                        <form id="form-delete-college-<?= $college->id ?>" action="<?= $this->Url->build('/admin/delete-college/' . $college->id) ?>" method="post">
+                          <?= $this->Form->hidden('_csrfToken', ['value' => $this->request->getAttribute('csrfToken')]) ?>
+                          <input type="hidden" value="<?= $college->id ?>" name="id">
+                        </form>
+                        <a href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                        <a href="javascript:void(0)" onclick="if(confirm('Are you sure want to delete?')){$('#form-delete-college-<?= $college->id ?>').submit()}" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                <?php
+                  }
+                }
+                ?>
+              </tbody>
             </table>
           </div>
           <!-- /.card-body -->

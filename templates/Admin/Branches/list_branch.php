@@ -47,16 +47,6 @@ $this->Html->css([
                   <th>Action</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>#</th>
-                  <th>Branch Info</th>
-                  <th>College Name</th>
-                  <th>Total Seats</th>
-                  <th>Total Durations</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
           <!-- /.card-body -->
