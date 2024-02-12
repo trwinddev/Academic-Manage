@@ -43,7 +43,9 @@ $this->Html->css([
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <form id="form-add-branch">
+            <?= $this->Form->create($branch, [
+                'id' => 'form-add-branch'
+            ]) ?>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -63,7 +65,16 @@ $this->Html->css([
                   <div class="form-group">
                     <label for="">Select College<span class="character-required">*</span></label>
                     <select required name="college_id" id="college_id" class="form-control">
-                      <option value="">Sample Colleage</option>
+                      <option value="">Choose Colleage</option>
+                      <?php
+                      if(count($colleges) > 0) {
+                        foreach ($colleges as $index => $college) {
+                        ?>
+                        <option value="<?= $college->id ?>"><?= $college->name ?></option>
+                        <?php
+                        }
+                    }
+                    ?>
                     </select>
                   </div>
                 </div>
@@ -113,7 +124,7 @@ $this->Html->css([
                   </div>
                 </div>
               </div>
-            </form>
+            <?= $this->Form->end() ?>
           </div>
           <!-- /.card-body -->
         </div>

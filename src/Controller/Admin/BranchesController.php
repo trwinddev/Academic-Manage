@@ -11,10 +11,27 @@ class BranchesController extends AppController
   {
     parent::initialize();
     $this->viewBuilder()->setLayout('admin');
+
+    $this->loadModel('Colleges');
   }
 
   public function addBranch()
   {
+    $branch = $this->Branches->newEmptyEntity();
+    if($this->request->is('post')) {
+        $branchData = $this->request->getData();
+        $branch = $this->Branches->patchEntity($branch, $branchData);
+        if($this->Branches->save($branch)) {
+            $this->Flash->success('Branch has been created successfully');
+            return $this->redirect(['action' => 'listBranch']);
+        } else {
+            $this->Flash->error('Failed to create branch');
+        }
+    }
+
+    $colleges = $this->Colleges->find()->select(['id', 'name'])->toList();
+    $this->set(compact('colleges', 'branch'));
+
     $this->set('title', 'Add Branch | Academic Management');
   }
 
