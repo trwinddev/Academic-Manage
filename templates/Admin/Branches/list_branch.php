@@ -47,6 +47,26 @@ $this->Html->css([
                   <th>Action</th>
                 </tr>
               </thead>
+              <tbody>
+                <?php
+                if (count($branches) > 0) {
+                  foreach ($branches as $index => $branch) {
+                ?>
+                    <tr>
+                      <td><?= $branch->id ?></td>
+                      <td><?= "<b>Name: </b>" . $branch->name . "<br/><b>Session Start: </b> " . $branch->start_date . "<br/><b>Session End: </b>" . $branch->end_date ?></td>
+                      <td><?= isset($branch->branch_college->name) ? $branch->branch_college->name : 'N/A' ?></td>
+                      <td><?= $branch->total_seats ?></td>
+                      <td><?= $branch->total_durations ?></td>
+                      <td class="d-flex">
+                        <a href="<?= $this->Url->build('/admin/edit-branch/' . $branch->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                      </td>
+                    </tr>
+                <?php
+                  }
+                }
+                ?>
+              </tbody>
             </table>
           </div>
           <!-- /.card-body -->

@@ -10,5 +10,8 @@ class BranchesTable extends Table
   {
     // tbl_branches
     $this->setTable('tbl_branches');
+    $this->belongsTo('branch_college', [
+        'className' => 'Colleges'
+    ])->setForeignKey('college_id');
   }
 }
