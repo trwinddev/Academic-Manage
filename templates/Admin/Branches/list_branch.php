@@ -47,6 +47,35 @@ $this->Html->css([
                   <th>Action</th>
                 </tr>
               </thead>
+              <tbody>
+                <?php
+                if (count($branches) > 0) {
+                  foreach ($branches as $index => $branch) {
+                ?>
+                    <tr>
+                      <td><?= $branch->id ?></td>
+                      <td><?= "<b>Name: </b>" . $branch->name . "<br/><b>Session Start: </b> " . $branch->start_date . "<br/><b>Session End: </b>" . $branch->end_date ?></td>
+                      <td><?= isset($branch->branch_college->name) ? $branch->branch_college->name : 'N/A' ?></td>
+                      <td><?= $branch->total_seats ?></td>
+                      <td><?= $branch->total_durations ?></td>
+                      <td class="d-flex">
+                        <form id="form-delete-branch" method="post" action="<?= $this->Url->build('/admin/delete-branch/' . $branch->id, ['fullBase' => true]) ?>"></form>
+                        <a href="<?= $this->Url->build('/admin/edit-branch/' . $branch->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                        <div class="ml-2">
+                          <?= $this->Form->create(null, ['url' => ['action' => 'deleteBranch', $branch->id], 'id' => 'form-delete-branch-' . $branch->id]) ?>
+                          <?= $this->Form->hidden('id', ['value' => $branch->id]) ?>
+                          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')">
+                            <i class="fa fa-trash-alt"></i>
+                          </button>
+                          <?= $this->Form->end() ?>
+                        </div>
+                        </td>
+                    </tr>
+                <?php
+                  }
+                }
+                ?>
+              </tbody>
             </table>
           </div>
           <!-- /.card-body -->
