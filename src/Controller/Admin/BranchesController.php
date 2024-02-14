@@ -80,6 +80,14 @@ class BranchesController extends AppController
 
   public function deleteBranch($id = null)
   {
-    $this->set('title', 'Delete Branch | Academic Management');
+    $this->request->allowMethod(['post', 'delete']);
+    $branch = $this->Branches->get($id);
+
+    if ($this->Branches->delete($branch)) {
+      $this->Flash->success('Branch has been deleted successfully');
+    } else {
+      $this->Flash->error('Failed to delete branch');
+    }
+    return $this->redirect(['action' => 'listBranch']);
   }
 }
