@@ -151,5 +151,20 @@ $this->Html->css([
 <?php
 $this->Html->scriptStart(['block' => true]);
 echo '$("#tbl-students").DataTable();';
+echo '$(document).on("change", "#dd_college", function(){
+    var college_id = $(this).val();
+    var postdata = "college_id=" + college_id;
+    $.get("' . $this->Url->build("/admin/allot-college", ["fullBase" => true]) .'", postdata, function(response) {
+        var data = $.parseJSON(response);
+        if(data.status) {
+            var branchHtml = "<option value=\'\'>Choose Branch</option>";
+            $.each(data.branches, function(index, item) {
+                branchHtml += "<option value=\'"+item.id+"\'>"+item.name+"</option>"
+            });
+
+            $("#dd_branch").html(branchHtml);
+        }
+    })
+})';
 $this->Html->scriptEnd();
 ?>

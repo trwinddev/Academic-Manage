@@ -13,6 +13,7 @@ class StudentsController extends AppController
     $this->viewBuilder()->setLayout('admin');
     $this->loadModel('Students');
     $this->loadModel('Colleges');
+    $this->loadModel('Branches');
   }
 
   public function addStudent()
@@ -69,5 +70,20 @@ class StudentsController extends AppController
   public function deleteStudent($id = null)
   {
     $this->set('title', 'Delete Student | Academic Management');
+  }
+
+  public function getCollegeBranches()
+  {
+    $this->autoRender = false;
+    $college_id = $this->request->getQuery('college_id');
+    $branches = $this->Branches->find()->select(['id', 'name'])->where([
+        'college_id' => $college_id
+    ])->toList();
+
+    echo json_encode(array(
+        'status' => 1,
+        'message' => 'Branches found',
+        'branches' => $branches
+    ));
   }
 }

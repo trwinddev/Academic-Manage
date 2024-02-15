@@ -83,6 +83,8 @@ return function (RouteBuilder $routes): void {
         $routes->connect('/college-report', ['controller' => 'Reports', 'action' => 'collegesReport']);
         $routes->connect('/student-report', ['controller' => 'Reports', 'action' => 'studentsReport']);
         $routes->connect('/staff-report', ['controller' => 'Reports', 'action' => 'staffsReport']);
+
+        $routes->connect('/allot-college', ['controller' => 'Students', 'action' => 'getCollegeBranches']);
     });
 
     $routes->scope('/', function (RouteBuilder $builder): void {
