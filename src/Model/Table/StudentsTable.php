@@ -10,5 +10,17 @@ class StudentsTable extends Table
   {
     // tbl_students
     $this->setTable('tbl_students');
+
+    // college
+    $this->belongsTo('studentCollege', [
+      'className' => 'Colleges',
+      'foreignKey' => 'college_id',
+    ]);
+
+    // branch
+    $this->belongsTo('studentBranch', [
+      'className' => 'Branches',
+      'foreignKey' => 'branch_id',
+    ]);
   }
 }

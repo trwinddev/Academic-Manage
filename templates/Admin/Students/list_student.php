@@ -48,6 +48,44 @@ $this->Html->css([
                   <th>Action</th>
                 </tr>
               </thead>
+              <tbody>
+                <?php
+                if (count($students) > 0) {
+                  foreach ($students as $index => $student) {
+                ?>
+                    <tr>
+                      <td><?= $student->id ?></td>
+                      <td>
+                        <?= "<b>Name: </b>" . $student->name ?><br>
+                        <?= "<b>Email: </b>" . $student->email ?><br>
+                        <?= "<b>PhoneNo: </b>" . $student->phone_no ?><br>
+                        <?= "<b>BG: </b>" . $student->blood_group ?><br>
+                      </td>
+                      <td>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#modal-allot-college">Allot College</button>
+                      </td>
+                      <td><?= strtoupper($student->gender) ?></td>
+                      <td>
+                        <?= $this->Html->image("/" . $student->profile_image, [
+                          'style' => 'width: 70px; height: 70px; object-fit: cover',
+                        ]) ?>
+                      </td>
+                      <td>
+                        <?= $student->status == 1
+                          ? "<button class='btn btn-success'>Active</button>"
+                          : "<button class='btn btn-danger'>Inactive</button>"
+                        ?>
+                      </td>
+                      <td>
+                        <a href="" class="btn btn-info"><i class="fa fa-pencil-alt"></i></a>
+                        <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                      </td>
+                    </tr>
+                <?php
+                  }
+                }
+                ?>
+              </tbody>
             </table>
           </div>
           <!-- /.card-body -->
@@ -60,6 +98,49 @@ $this->Html->css([
   </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+
+<!-- The Modal -->
+<div class="modal" id="modal-allot-college">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Assign College/Branch</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form action="javascript:void(0)" method="post">
+          <div class="form-group">
+            <label>Select College:</label>
+            <select name="dd_college" id="dd_college" class="form-control">
+              <option value="">Choose college</option>
+              <?php
+              foreach ($colleges as $index => $college) {
+              ?>
+                <option value="<?= $college->id ?>"><?= $college->name ?></option>
+              <?php
+              }
+              ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Select Branch:</label>
+            <select name="dd_branch" id="dd_branch" class="form-control">
+              <option value="">Choose branch</option>
+            </select>
+          </div>
+          <div class="form-group form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox"> Remember me
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?= $this->Html->script([
   '/plugins/datatables/jquery.dataTables.min.js',

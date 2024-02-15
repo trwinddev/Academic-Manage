@@ -12,6 +12,7 @@ class StudentsController extends AppController
     parent::initialize();
     $this->viewBuilder()->setLayout('admin');
     $this->loadModel('Students');
+    $this->loadModel('Colleges');
   }
 
   public function addStudent()
@@ -46,6 +47,17 @@ class StudentsController extends AppController
 
   public function listStudent()
   {
+    $students = $this->Students->find()->contain([
+      'studentCollege' => function ($q) {
+        return $q->select(['id', 'name']);
+      },
+      'studentBranch' => function ($q) {
+        return $q->select(['id', 'name']);
+      },
+    ])->toList();
+    $this->set(compact('students'));
+    $colleges = $this->Colleges->find()->select(['id', 'name'])->toList();
+    $this->set(compact('colleges'));
     $this->set('title', 'List Student | Academic Management');
   }
 
